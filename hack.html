@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProMatch - Matchmaking for Young Professionals</title>
+    <meta name="description" content="Connect with ambitious young professionals who share your drive and values. Build meaningful relationships that go beyond the surface." />
+    <meta name="author" content="ProMatch" />
+
+    <meta property="og:title" content="ProMatch - Matchmaking for Young Professionals" />
+    <meta property="og:description" content="Connect with ambitious young professionals who share your drive and values. Build meaningful relationships that go beyond the surface." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ProMatch" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946; /* Romantic red */
+            --secondary: #f8ad9d; /* Soft pink */
+            --accent: #fca311; /* Gold accent */
+            --light: #f1faee; /* Clean white */
+            --dark: #1d3557; /* Professional dark blue */
+            --promatch-primary: #e63946;
+            --promatch-secondary: #f8ad9d;
+            --promatch-accent: #fca311;
+            --promatch-light: #f1faee;
+            --promatch-dark: #1d3557;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+           
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        ;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            color: white;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(29, 53, 87, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(252, 163, 17, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+        }
+        
+        .age-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            backdrop-filter: blur(8px);
+        }
+        
+        .age-gate-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: scaleIn 0.4s ease-out;
+        }
+        
+        .age-gate h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .age-gate h2 i {
+            margin-right: 12px;
+            color: var(--primary);
+        }
+        
+        .age-gate p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .age-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #c0c0c0;
+        }
+        
+        .features {
+            padding: 6rem 2rem;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+        
+        .feature-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .testimonials {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        
+        .quote-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            opacity: 0.2;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-card .quote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        .testimonial-card .author {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .signup-section {
+            padding: 6rem 2rem;
+            background-color: var(--light);
+        }
+        
+        .signup-form {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 3rem;
+            background-image: url('bg.jpg');
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .signup-form h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+            font-size: 2.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.2);
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .social-btn {
+            padding: 12px;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .google {
+            background: #DB4437;
+        }
+        
+        .facebook {
+            background: #4267B2;
+        }
+        
+        .apple {
+            background: #000000;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+            z-index: -1;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #777;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+        
+        .toast.error {
+            background-color: var(--primary);
+        }
+        
+        .toast.success {
+            background-color: #4CAF50;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            nav {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                margin: 0.5rem;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 6rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features,
+            .testimonials,
+            .signup-section {
+                padding: 4rem 1rem;
+            }
+            
+            .feature-grid,
+            .testimonial-grid {
+                gap: 1.5rem;
+            }
+            
+            .signup-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+<div class="preloader" id="preloader">
+    <div class="heart-container">
+        <div class="heart-line"></div>
+        <div class="heart-bg"></div>
+        <i class="fas fa-heart main-heart"></i> 
+        <div class="floating-hearts">
+            <div class="heart h1"><i class="fas fa-heart"></i></div>
+            <div class="heart h2"><i class="fas fa-heart"></i></div>
+            <div class="heart h3"><i class="fas fa-heart"></i></div>
+        </div>
+    </div>
+    <div class="loading-text">Preparing your perfect matches...</div>
+</div>
+
+<style>
+/* Add this to the existing CSS */ 
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    transition: opacity 0.5s ease;
+} 
+
+.heart-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.main-heart {
+    position: absolute;
+    font-size: 4rem;
+    color: var(--light); 
+    animation: heartbeat 1.2s ease-in-out infinite both;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heart-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: pulse 2s ease-out infinite; 
+}
+
+.heart-line {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--light);
+    border-radius: 50%;
+    animation: rotate 8s linear infinite; 
+}
+
+.floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.heart {
+    position: absolute;
+    font-size: 1.2rem;
+    color: var(--light); 
+    opacity: 0;
+}
+
+.heart.h1 { animation: float 3s ease-in infinite; }
+.heart.h2 { animation: float 3s 0.5s ease-in infinite; }
+.heart.h3 { animation: float 3s 1s ease-in infinite; }
+ 
+.loading-text {
+    color: var(--light);
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    animation: textGlow 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    15% { transform: translate(-50%, -50%) scale(1.3); }
+    30% { transform: translate(-50%, -50%) scale(1); }
+    45% { transform: translate(-50%, -50%) scale(1.15); }
+    60% { transform: translate(-50%, -50%) scale(1); } 
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0% { 
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+    }
+    20% { opacity: 1; } 
+    100% {
+        opacity: 0;
+        transform: translateY(-150px) translateX(50px);
+    }
+}
+
+@keyframes textGlow {
+    0% { opacity: 0.8; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+    50% { opacity: 1; text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+    100% { opacity: 0.8; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+}
+</style>
+
+<script> 
+// Update the existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const preloader = document.getElementById('preloader');
+    
+    // Show preloader first
+    setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+            
+            // Then show age gate or main content
+            const ageVerified = localStorage.getItem('ageVerified');
+            const ageGate = document.getElementById('ageGate');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (ageVerified === 'true') {
+                ageGate.style.display = 'none';
+                mainContent.style.display = 'block';
+            } else {
+                ageGate.style.display = 'flex';
+                mainContent.style.display = 'none';
+            }
+        }, 500);
+    }, 3000); // 3-second animation
+});
+</script> 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Age Gate Modal -->
+ <!-- Age Gate Modal -->
+<!-- Age Gate Modal -->
+<!-- Age Gate Modal -->
+<div class="age-gate" id="ageGate">
+    <div class="age-gate-content">
+        <h2><i class="fas fa-heart"></i> Welcome to ProMatch</h2>
+        <p>Our platform is exclusively for young professionals aged 18 and above. Please confirm your age to continue.</p>
+        <div class="age-buttons">
+            <button class="btn" id="over18">I'm above 18</button>
+            <button class="btn btn-secondary" id="under18">I'm not 18</button>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Main Content (hidden until age verified) -->
+    <div id="mainContent" style="display: none;">
+        <header>
+            <div class="logo">
+                <i class="fas fa-heart"></i> ProMatch
+            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#testimonials">Success Stories</a>
+                <a href="#signup">Sign Up</a>
+                <a href="#" id="loginBtn">Login</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find Your Professional Match</h1>
+                <p>Connect with ambitious young professionals who share your drive and values. 
+                Build meaningful relationships that go beyond the surface.</p>
+                <a href="#signup" class="btn">Get Started</a>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <h2>Why Choose ProMatch?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-user-check"></i>
+                    <h3>Verified Professionals</h3>
+                    <p>All members are verified young professionals with completed education and established careers.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Smart Matching</h3>
+                    <p>Our AI analyzes your personality, values, and lifestyle to suggest highly compatible matches.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe & Secure</h3>
+                    <p>Advanced security measures and verification processes ensure a safe dating environment.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Career-Focused</h3>
+                    <p>Connect with partners who understand your professional ambitions and schedule.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Video Dating</h3>
+                    <p>Get to know matches through secure video calls before meeting in person.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Event Matching</h3>
+                    <p>Exclusive professional networking and social events for our members.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <h2>Success Stories</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="quote">"As two busy lawyers, we never had time to meet people. ProMatch understood our schedules and values. We're now engaged!"</p>
+                    <p class="author">- Sarah & Michael, New York</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="quote">"The quality of professionals on this platform is unmatched. I met my girlfriend at a ProMatch networking event."</p>
+                    <p class="author">- David, San Francisco</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="quote">"After years of superficial dating apps, ProMatch helped me find someone who truly understands my career-driven lifestyle."</p>
+                    <p class="author">- Priya, Chicago</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Update the signup-section in your HTML -->
+<section class="signup-section" id="signup">
+    <div class="signup-form">
+        <div class="form-header">
+            <h2>Begin Your Journey to Meaningful Connections 💖</h2>
+            <p>Join our community of ambitious professionals in just 2 minutes</p>
+        </div>
+        
+        <div class="form-progress">
+            <div class="progress-bar"></div>
+            <div class="progress-step active">1</div>
+            <div class="progress-step">2</div>
+        </div>
+
+        <form id="registrationForm">
+            <div class="form-grid">
+                <!-- Left Column -->
+                <div class="form-column">
+                    <div class="form-group animated-input">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" required placeholder=" ">
+                        <label>Professional Email</label>
+                        <div class="input-border"></div>
+                    </div>
+
+                    <div class="form-group animated-input">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" required minlength="8" placeholder=" ">
+                        <label>Secure Password</label>
+                        <div class="input-border"></div>
+                        <div class="password-strength"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="form-column">
+                    <div class="form-group animated-input">
+                        <i class="fas fa-user-tie"></i>
+                        <input type="text" id="name" required placeholder=" ">
+                        <label>Full Name</label>
+                        <div class="input-border"></div>
+                    </div>
+
+                    <div class="form-group animated-input">
+                        <i class="fas fa-birthday-cake"></i>
+                        <input type="number" id="age" required min="18" placeholder=" ">
+                        <label>Age</label>
+                        <div class="input-border"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profession & Education with Icons -->
+            <div class="form-group select-group">
+                <i class="fas fa-briefcase"></i>
+                <select id="profession" required>
+                    <!-- keep existing options -->
+                </select>
+                <div class="select-arrow"></div>
+            </div>
+
+            <div class="form-group select-group">
+                <i class="fas fa-graduation-cap"></i>
+                <select id="education" required>
+                    <!-- keep existing options -->
+                </select>
+                <div class="select-arrow"></div>
+            </div>
+
+            <div class="form-motivation">
+                <i class="fas fa-heart"></i>
+                <p>
+                    <b>
+                        You're just one step away from connecting with amazing professionals!
+                    </b>
+                </p>
+            </div>
+
+            <button type="submit" class="btn btn-gradient">
+                Complete Profile & Meet Matches 
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+    </div>
+</section>
+
+<style>
+/* Add these new styles */
+.signup-form {
+    position: relative;
+    overflow: hidden;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.form-header h2 {
+    color: var(--primary);
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.form-header p {
+    color: var(--dark);
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.form-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.progress-bar {
+    position: absolute;
+    width: 80%;
+    height: 4px;
+    background: var(--light);
+    z-index: 0;
+}
+
+.progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+}
+
+.progress-step.active {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.animated-input {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.animated-input i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    z-index: 1;
+}
+
+.animated-input input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid var(--light);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    position: relative;
+}
+
+.animated-input label {
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.animated-input input:focus,
+.animated-input input:valid {
+    border-color: var(--primary);
+}
+
+.animated-input input:focus ~ label,
+.animated-input input:valid ~ label {
+    top: -10px;
+    left: 35px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    background: white;
+    padding: 0 5px;
+}
+
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.animated-input input:focus ~ .input-border {
+    width: 100%;
+}
+
+.select-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.select-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    z-index: 1;
+}
+
+.select-group select {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid var(--light);
+    border-radius: 10px;
+    appearance: none;
+    font-size: 1rem;
+    background: white;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--primary);
+}
+
+.form-motivation {
+    background: rgba(252, 163, 17, 0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-motivation i {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.form-motivation p {
+    color: var(--dark);
+    margin: 0;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    width: 100%;
+    padding: 18px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+}
+
+/* Add floating hearts animation inside form */
+.signup-form::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: url('data:image/svg+xml,<svg viewBox="0 0 24 24" fill="%23e63946" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+    opacity: 0.1;
+    animation: floatFormHeart 8s infinite linear;
+}
+
+@keyframes floatFormHeart {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+</style>
+
+    <script>
+        // Age verification
+        document.addEventListener('DOMContentLoaded', function() {
+            const ageGate = document.getElementById('ageGate');
+            const mainContent = document.getElementById('mainContent');
+            const over18Btn = document.getElementById('over18');
+            const under18Btn = document.getElementById('under18');
+            const registrationForm = document.getElementById('registrationForm');
+            const toast = document.getElementById('toast');
+
+            // Show toast function
+            function showToast(message, type = '') {
+                toast.textContent = message;
+                toast.className = 'toast';
+                if (type) toast.classList.add(type);
+                toast.style.display = 'block';
+                
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+            }
+
+            // Check if age is already verified
+            const ageVerified = localStorage.getItem('ageVerified');
+
+            if (ageVerified === 'true') { 
+                ageGate.style.display = 'none';
+                mainContent.style.display = 'block';
+            } else {
+                ageGate.style.display = 'flex';
+                mainContent.style.display = 'none';
+            }
+            
+            over18Btn.addEventListener('click', function() { 
+                localStorage.setItem('ageVerified', 'true');
+                ageGate.style.display = 'none';
+                mainContent.style.display = 'block';
+            });
+
+            under18Btn.addEventListener('click', function() {
+                showToast('Sorry, ProMatch is only for young professionals aged 18 and above.', 'error');
+
+                // Redirect to Google after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'https://www.google.com';
+                }, 2000);
+            });
+            
+            // Form validation
+            registrationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const name = document.getElementById('name').value;
+                const age = parseInt(document.getElementById('age').value);
+                const profession = document.getElementById('profession').value;
+                const education = document.getElementById('education').value;
+                
+                if (age < 18) { 
+                    showToast('You must be 18 or older to join ProMatch.', 'error');
+                    return;
+                }
+
+                if (password.length < 8) {
+                    showToast('Password must be at least 8 characters long.', 'error');
+                    return;
+                }
+
+                if (!profession) {
+                    showToast('Please select your profession.', 'error');
+                    return;
+                }
+
+                if (!education) {
+                    showToast('Please select your highest education level.', 'error');
+                    return;
+                }
+
+                // In a real app, you would submit the form to your backend
+                showToast('Account created successfully! Redirecting to your dashboard...', 'success');
+
+                // Simulate redirect after successful form submission
+                setTimeout(() => { 
+                    // Clear form
+                    registrationForm.reset();
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // In a real app: window.location.href = '/dashboard';
+                }, 2000);
+            });
+
+            // Login button functionality
+            document.getElementById('loginBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('Login functionality would be implemented here.');
+            });
+
+            // Social login buttons
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const platform = this.classList.contains('google') ? 'Google' : 
+                                    this.classList.contains('facebook') ? 'Facebook' : 'Apple';
+                    showToast('In a real app, this would initiate ${platform} OAuth login.')
+                }); 
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script> 
+    <!-- Add this before the closing </body> tag -->
+<div class="floating-hearts-container"></div>
+
+<style>
+/* Update the CSS */
+.floating-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+ 
+.floating-heart {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: floatUp 8s linear infinite;
+    color: var(--primary);
+    bottom: -50px;
+    filter: drop-shadow(0 0 4px rgba(230, 57, 70, 0.3));
+}
+ 
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(0.8);
+        bottom: -50px;
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateX(calc(var(--x-offset) * 10px)) scale(1);
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-150vh) translateX(calc(var(--x-offset) * 30px)) scale(1.2);
+        bottom: 100%;
+    }
+}
+ 
+/* Add subtle rotation */
+.floating-heart i {
+    display: inline-block;
+    animation: gentleSway 3s ease-in-out infinite;
+}
+
+@keyframes gentleSway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+</style> 
+
+<script>
+// Update the JavaScript
+function createFloatingHeart() {
+    const container = document.querySelector('.floating-hearts-container');
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '<i class="fas fa-heart"></i>'; 
+
+    // Random horizontal position
+    const xOffset = Math.random() * 2 - 1; // Random between -1 and 1
+    heart.style.setProperty('--x-offset', xOffset);
+    heart.style.left = `${Math.random() * 100}%`;
+
+    // Random animation properties
+    heart.style.animationDuration = `${6 + Math.random() * 4}s`;
+    heart.style.animationDelay = `${Math.random() * 2}s`;
+    heart.style.fontSize = `${0.8 + Math.random() * 1.2}rem`;
+
+    // Color variations using your theme colors
+    const colors = ['var(--primary)', 'var(--secondary)', 'var(--accent)'];
+    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+    container.appendChild(heart);
+
+    // Remove heart after animation
+    setTimeout(() => heart.remove(), 8000);
+}
+
+// Create hearts with random intervals 
+setInterval(createFloatingHeart, 800);
+
+// Initial hearts
+for(let i = 0; i < 8; i++) {
+    setTimeout(createFloatingHeart, i * 600);
+}
+</script>
+</body>
+</html>
